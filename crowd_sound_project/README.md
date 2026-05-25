@@ -12,6 +12,21 @@ The project organizes sounds according to several perceptual and acoustic dimens
 
 The project also emphasizes reproducibility and open science practices through the use of Python, Jupyter notebooks, GitHub, and structured workflows for audio processing and metadata organization. Final deliverables will include reproducible scripts, interactive audio exploration tools, audio visualizations, structured datasets, and documentation to support reuse and long-term accessibility.
 
+
+## Project Structure
+
+crowd_sound_project/
+│
+├── analysis/       # Analysis scripts and processing workflows
+├── data/           # Raw and processed audio datasets
+├── figures/        # Generated visualizations and figures
+├── presentation/  # Project presentation materials and slides
+│
+├── environment.yml # Conda environment for reproducibility
+├── .gitignore      # Git ignored files
+└── README.md       # Project description and documentation
+
+
 ## Presentation link
 
  Click here to view the slides: https://docs.google.com/presentation/d/1v9t9jJARwTjZ2fG6t1Csj8lXJtg4WSRqbLEC1cxJR6A/edit?usp=sharing 
