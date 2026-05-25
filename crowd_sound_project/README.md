@@ -15,17 +15,20 @@ The project also emphasizes reproducibility and open science practices through t
 
 ## Project Structure
 
+```text
 crowd_sound_project/
 │
-├── analysis/       # Analysis scripts and processing workflows
-├── data/           # Raw and processed audio datasets
-├── figures/        # Generated visualizations and figures
-├── presentation/  # Project presentation materials and slides
+├── analysis/        # Analysis scripts and processing workflows
+├── data/            # Raw and processed audio datasets
+├── figures/         # Generated visualizations and figures
+├── presentation/    # Project presentations and slides
 │
-├── environment.yml # Conda environment for reproducibility
-├── .gitignore      # Git ignored files
-└── README.md       # Project description and documentation
+├── environment.yml  # Conda environment for reproducibility
+├── .gitignore       # Git ignored files
+└── README.md        # Project description and documentation
+```
 
+This structure is designed to support reproducibility, organization, and open science practices throughout the project development process.
 
 ## Presentation link
 
