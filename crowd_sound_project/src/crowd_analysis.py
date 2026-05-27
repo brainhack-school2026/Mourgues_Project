@@ -2,13 +2,17 @@ import os
 import json
 import numpy as np
 import librosa
-import matplotlib.pyplot as plt
-import librosa.display
 
 # Audio folder
 audio_folder = "../data/sounds"
+output_folder = "../outputs"
+
+os.makedirs(output_folder, exist_ok=True)
 
 print(os.listdir(audio_folder))
+
+# Global results (optionnel si tu veux un résumé global)
+results = {}
 
 # Loop
 for file in os.listdir(audio_folder):
@@ -18,68 +22,59 @@ for file in os.listdir(audio_folder):
         path = os.path.join(audio_folder, file)
         audio, sr = librosa.load(path, sr=None)
 
-        # Output folder
-        sound_name = file.replace(".wav", "")
-        output_folder = f"../outputs/{sound_name}"
-        os.makedirs(output_folder, exist_ok=True)
-
-        print("FILE:", file)
+        print("\nFILE:", file)
         print("LENGTH:", len(audio))
 
         # Duration
         duration = len(audio) / sr
-        print("Durée (s):", duration)
 
         # Intensity
         rms = librosa.feature.rms(y=audio)
         global_intensity = float(np.mean(rms))
-        print("Intensité globale:", global_intensity)
 
         # F0
         f0 = librosa.yin(audio, fmin=50, fmax=500)
         f0_mean = float(np.nanmean(f0))
         f0_var = float(np.nanstd(f0))
 
-        print("F0 moyenne:", f0_mean)
-        print("Variabilité F0:", f0_var)
+        # Spectral features
+        spectral_centroid = librosa.feature.spectral_centroid(y=audio, sr=sr)
+        spectral_bandwidth = librosa.feature.spectral_bandwidth(y=audio, sr=sr)
+        spectral_rolloff = librosa.feature.spectral_rolloff(y=audio, sr=sr)
 
-        # Spectral centroid
-        centroid = librosa.feature.spectral_centroid(y=audio, sr=sr)
-        spectral_balance = float(np.mean(centroid))
+        mfcc = librosa.feature.mfcc(y=audio, sr=sr, n_mfcc=13)
 
-        print("Spectre (centroid moyen):", spectral_balance)
+        spectral_features = {
+            "spectral_centroid_mean": float(np.mean(spectral_centroid)),
+            "spectral_bandwidth_mean": float(np.mean(spectral_bandwidth)),
+            "spectral_rolloff_mean": float(np.mean(spectral_rolloff)),
+            "mfcc_mean": mfcc.mean(axis=1).tolist()
+        }
 
-        # Waveform
-        plt.figure(figsize=(10, 3))
-        librosa.display.waveshow(audio, sr=sr)
-        plt.title(f"Waveform - {file}")
-        plt.tight_layout()
-        plt.savefig(f"{output_folder}/waveform.png")
-        plt.close()
+        # Output folder per sound
+        sound_name = file.replace(".wav", "")
+        sound_output_folder = os.path.join(output_folder, sound_name)
 
-        # Spectrogram
-        S = librosa.feature.melspectrogram(y=audio, sr=sr)
-        S_db = librosa.power_to_db(S, ref=np.max)
-
-        plt.figure(figsize=(10, 4))
-        librosa.display.specshow(S_db, sr=sr, x_axis='time', y_axis='mel')
-        plt.colorbar(format='%+2.0f dB')
-        plt.title(f"Mel Spectrogram - {file}")
-        plt.tight_layout()
-        plt.savefig(f"{output_folder}/spectrogram.png")
-        plt.close()
+        os.makedirs(sound_output_folder, exist_ok=True)
 
         # JSON per sound
-        results = {
-            "duration": duration,
+        result = {
+            "file": file,
+            "duration": float(duration),
             "global_intensity": global_intensity,
             "f0_mean": f0_mean,
             "f0_variability": f0_var,
-            "spectral_balance": spectral_balance
+            **spectral_features
         }
 
-        with open(f"{output_folder}/results.json", "w") as f:
-            json.dump(results, f, indent=4)
+        # save per file
+        json_path = os.path.join(sound_output_folder, "results.json")
 
-print("DONE - all files processed")
+        with open(json_path, "w") as f:
+            json.dump(result, f, indent=4)
 
+        results[file] = result
+
+        print("Saved:", json_path)
+
+print("\nDONE - all files processed")
