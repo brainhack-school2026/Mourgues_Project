@@ -18,14 +18,51 @@ The project also emphasizes reproducibility and open science practices through t
 ```text
 crowd_sound_project/
 │
-├── analysis/        # Analysis scripts and processing workflows
-├── data/            # Raw and processed audio datasets
-├── figures/         # Generated visualizations and figures
-├── presentation/    # Project presentations and slides
-│
-├── environment.yml  # Conda environment for reproducibility
-├── .gitignore       # Git ignored files
-└── README.md        # Project description and documentation
+├── README.md
+├── analyses
+├── data
+│   └── sounds
+│       ├── A-01.wav
+│       ├── A-02.wav
+│       ├── A-03.wav
+│       ├── A-04.wav
+│       ├── A-05.wav
+│       ├── A-06.wav
+│       ├── J-01.wav
+│       ├── J-02.wav
+│       ├── J-03.wav
+│       ├── J-04.wav
+│       ├── J-05.wav
+│       └── J-06.wav
+├── environment.yml
+├── figures
+├── outputs
+│   ├── A-01
+│   │   └── results.json
+│   ├── A-02
+│   │   └── results.json
+│   ├── A-03
+│   │   └── results.json
+│   ├── A-04
+│   │   └── results.json
+│   ├── A-05
+│   │   └── results.json
+│   ├── A-06
+│   │   └── results.json
+│   ├── J-01
+│   │   └── results.json
+│   ├── J-02
+│   │   └── results.json
+│   ├── J-03
+│   │   └── results.json
+│   ├── J-04
+│   │   └── results.json
+│   ├── J-05
+│   │   └── results.json
+│   └── J-06
+│       └── results.json
+└── src
+    └── crowd_analysis.py
 ```
 
 This structure is designed to support reproducibility, organization, and open science practices throughout the project development process.
