@@ -125,174 +125,182 @@ Each audio file generates a JSON file:
 
 **File:** `src/visualization.py`
 
-# Objective
+### Objective
 Compare audio signals between groups (A vs J) and analyze their acoustic structure.
 
-# Packages used
-
+### Packages used
 - seaborn
 - pandas
 - scikit-learn
 
 ---
 
-# 2.1 Boxplots (statistical comparison)
+### 2.1 Boxplots (statistical comparison)
 
-# Variables analyzed
-
+#### Variables analyzed
 - F0 (pitch)
 - spectral centroid (brightness / noisiness)
 
-# Code used
-
+#### Code
 ```python
 sns.boxplot(data=df, x="group", y="f0_mean")
 sns.boxplot(data=df, x="group", y="spectral_centroid_mean")
+```
 
-# Interpretation
-
+#### Interpretation
 - pitch differences between groups  
 - spectral richness / noise differences  
 
 ---
 
-# 2.2 PCA (dimensionality reduction)
+### 2.2 PCA (dimensionality reduction)
 
-# Objective
+#### Objective
 Reduce MFCC features from 13D → 2D
 
-# Method
-
+#### Method
 ```python
 PCA(n_components=2)
+```
 
-# Output
+#### Output
+- `pca_mfcc.png` → global visualization  
+- `pca_mfcc_individual.png` → individual labeled points  
 
-- pca_mfcc.png → global visualization  
-- pca_mfcc_individual.png → individual labeled points  
-
-# Interpretation
-
+#### Interpretation
 - clustering of similar sounds  
 - separation or overlap between groups  
 - detection of outliers  
 
+---
 
+### 2.3 K-means clustering
 
-# 2.3 K-means clustering
-
-# Objective
+#### Objective
 Check if the algorithm can recover groups without labels.
 
-# Method
-
+#### Method
 ```python
 KMeans(n_clusters=2)
+```
 
-# Output
+#### Output
+- `kmeans_mfcc.png`
 
-- kmeans_mfcc.png  
-
-# Interpretation
-
+#### Interpretation
 - clusters ≈ A/J → good separability  
 - mixed clusters → strong variability  
 
-
+---
 
 ## Step 3 – Feature Interpretation
 
-# F0 (Pitch)
-
+### F0 (Pitch)
 - high → high-pitched sounds  
 - low → low-pitched sounds  
 
-
-
-# spectral centroid
-
+### Spectral centroid
 - high → noisy / crowd / mixed sounds  
 - low → stable / pure sounds  
 
-
-
-# PCA MFCC
-
+### PCA (MFCC)
 - clear separation → distinct classes  
 - overlap → acoustic similarity  
 
-
-
-# clustering
-
+### Clustering
 - validates or questions dataset structure  
 
-
+---
 
 ## Step 4 – Feature Inspection
 
 **File:** `src/visualization.py`
 
-# Objective
+### Objective
 Inspect each sound individually using acoustic features.
 
-# Features analyzed
-
+### Features analyzed
 - highest / lowest F0  
 - highest / lowest spectral centroid  
 - highest / lowest spectral bandwidth  
 - highest / lowest spectral rolloff  
 
-
-
-# Method
-
-```python id="m8k3qz"
+### Method
+```python
 df_sorted_f0 = df.sort_values(by="f0_mean", ascending=False)
 df_sorted_centroid = df.sort_values(by="spectral_centroid_mean", ascending=False)
 df_sorted_bandwidth = df.sort_values(by="spectral_bandwidth_mean", ascending=False)
 df_sorted_rolloff = df.sort_values(by="spectral_rolloff_mean", ascending=False)
+```
 
-# Output
+### Output
+- `outputs/feature_inspection.json`
 
-- outputs/feature_inspection.json  
-
-
-
-# Why this step is useful
-
+### Why this step is useful
 - detect outliers  
 - understand acoustic differences  
 - prepare machine learning analysis  
 - interpret PCA and clustering  
 
-
+---
 
 ## Step 5 – Run the project
 
-# 1. Feature extraction
-
+### Feature extraction
 ```bash
 python src/crowd_analysis.py
+```
 
-
-
-# Visualization
-
-**File execution:**
-
+### Visualization
 ```bash
 python src/visualization.py
+```
 
-# Check outputs
+### Check outputs
+```bash
 ls outputs/
 ls figures/
-Conclusion
+```
 
-##This project allows:
+---
 
-extraction of acoustic features
-statistical comparison between groups
-visualization of dataset structure
-testing class separability
-exploration of acoustic variability
+## Conclusion
+
+This project allows:
+- extraction of acoustic features  
+- statistical comparison between groups  
+- visualization of dataset structure  
+- testing class separability  
+- exploration of acoustic variability  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
