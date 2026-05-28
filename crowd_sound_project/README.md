@@ -77,41 +77,38 @@ This structure is designed to support reproducibility, organization, and open sc
  Click here to view the slides: https://docs.google.com/presentation/d/1v9t9jJARwTjZ2fG6t1Csj8lXJtg4WSRqbLEC1cxJR6A/edit?usp=sharing 
 
 
-##Production
- 
-#Step 1 – Audio Feature Extraction
 
-File: src/crowd_analysis.py
+## Procedure
 
+---
 
-Objective
+## Step 1 – Audio Feature Extraction
 
-Extract acoustic features from each .wav file.
+**File:** `src/crowd_analysis.py`
 
+### Objective
+Extract acoustic features from each `.wav` audio file using `librosa`.
 
-Package used:
+### Extracted Features
 
-librosa
+- duration  
+- global intensity (RMS)  
+- fundamental frequency (F0)  
+- spectral centroid  
+- spectral bandwidth  
+- spectral rolloff  
+- MFCC (13 coefficients)  
 
+### Output
 
-#Extracted Features
+Each audio file generates a JSON file:
 
-For each sound:
+- outputs/J-03/results.json
+- outputs/A-01/results.json
 
-duration
-global intensity (RMS)
-fundamental frequency (F0)
-spectral centroid
-spectral bandwidth
-spectral rolloff
-MFCC (13 coefficients)
-Output
+### Example JSON
 
-Each sound generates:
-
-outputs/A-01/results.json
-outputs/J-03/results.json
-Example JSON Content
+```json
 {
   "file": "A-01.wav",
   "duration": 1.5,
@@ -124,177 +121,178 @@ Example JSON Content
   "mfcc_mean": [...]
 }
 
-#Step 2 – Visualization and Analysis
+## Step 2 – Visualization and Analysis
 
-File: src/visualization.py
+**File:** `src/visualization.py`
 
-Packages used:
+### Objective
+Compare audio signals between groups (A vs J) and analyze their acoustic structure.
 
-Seaborn
-Pandas
-Scikit-learn
-Objective
+### Packages used
 
-Compare sounds individually and between groups (A vs J).
+- seaborn
+- pandas
+- scikit-learn
 
+---
 
-2.1 Boxplots (Statistical Comparison)
+### 2.1 Boxplots (statistical comparison)
 
-Analyzed variables:
+### Variables analyzed
 
-F0 (pitch)
-spectral centroid (brightness)
+- F0 (pitch)
+- spectral centroid (brightness / noisiness)
 
+### Code used
 
-Code used:
-
+```python
 sns.boxplot(data=df, x="group", y="f0_mean")
+sns.boxplot(data=df, x="group", y="spectral_centroid_mean")
 
-sns.boxplot(
-    data=df,
-    x="group",
-    y="spectral_centroid_mean"
-)
+### Interpretation
 
-Interpretation
-pitch differences between groups
-differences in spectral richness / noisiness
+- pitch differences between groups  
+- spectral richness / noise differences  
 
+---
 
+### 2.2 PCA (dimensionality reduction)
 
-2.2 PCA (Dimensionality Reduction)
+### Objective
+Reduce MFCC features from 13D → 2D
 
-Objective
+### Method
 
-Reduce MFCC dimensions from 13D to 2D.
-
-Method used:
-
+```python
 PCA(n_components=2)
-Output
-pca_mfcc.png → global A vs J visualization
-pca_mfcc_individual.png → each sound individually labeled
-Interpretation
-grouping of similar sounds
-class separation or overlap
-outlier detection
 
+### Output
 
+- pca_mfcc.png → global visualization  
+- pca_mfcc_individual.png → individual labeled points  
 
-2.3 Clustering (K-means)
+### Interpretation
 
-Objective
+- clustering of similar sounds  
+- separation or overlap between groups  
+- detection of outliers  
 
-Check if the algorithm can identify groups without labels.
+---
 
-Method used:
+### 2.3 K-means clustering
 
+### Objective
+Check if the algorithm can recover groups without labels.
+
+### Method
+
+```python
 KMeans(n_clusters=2)
-Output
-kmeans_mfcc.png
-Interpretation
-clusters ≈ A/J → groups are well separated
-mixed clusters → strong internal variability
-Step 3 – Result Interpretation
-F0 (Pitch)
-higher values → higher-pitched sounds
-lower values → deeper sounds
-Spectral Centroid
-high values → noisy / crowd / mixed sounds
-low values → stable / pure sounds
-PCA MFCC
-clear separation → distinct classes
-overlap → acoustic similarity
-Clustering
-validates or questions the natural structure of the dataset
 
+### Output
 
-#Step 4 – Feature Inspection (Detailed Sound Analysis)
+- kmeans_mfcc.png  
 
-File: src/visualization.py
+### Interpretation
 
-Packages used:
+- clusters ≈ A/J → good separability  
+- mixed clusters → strong variability  
 
-Pandas
-Seaborn
-Objective
+---
 
-Inspect sounds individually according to acoustic features to identify:
+## Step 3 – Feature Interpretation
 
-highest pitch sounds
-lowest pitch sounds
-noisiest sounds
-most energetic sounds
-extreme values and outliers
-Method
+### F0 (Pitch)
 
-The data is loaded into a Pandas DataFrame and sorted according to several acoustic parameters.
+- high → high-pitched sounds  
+- low → low-pitched sounds  
 
-Code used:
+---
 
+### spectral centroid
+
+- high → noisy / crowd / mixed sounds  
+- low → stable / pure sounds  
+
+---
+
+### PCA MFCC
+
+- clear separation → distinct classes  
+- overlap → acoustic similarity  
+
+---
+
+### clustering
+
+- validates or questions dataset structure  
+
+---
+
+## Step 4 – Feature Inspection
+
+**File:** `src/visualization.py`
+
+### Objective
+Inspect each sound individually using acoustic features.
+
+### Features analyzed
+
+- highest / lowest F0  
+- highest / lowest spectral centroid  
+- highest / lowest spectral bandwidth  
+- highest / lowest spectral rolloff  
+
+---
+
+### Method
+
+```python id="m8k3qz"
 df_sorted_f0 = df.sort_values(by="f0_mean", ascending=False)
+df_sorted_centroid = df.sort_values(by="spectral_centroid_mean", ascending=False)
+df_sorted_bandwidth = df.sort_values(by="spectral_bandwidth_mean", ascending=False)
+df_sorted_rolloff = df.sort_values(by="spectral_rolloff_mean", ascending=False)
 
-df_sorted_centroid = df.sort_values(
-    by="spectral_centroid_mean",
-    ascending=False
-)
+### Output
 
-df_sorted_bandwidth = df.sort_values(
-    by="spectral_bandwidth_mean",
-    ascending=False
-)
+- outputs/feature_inspection.json  
 
-df_sorted_rolloff = df.sort_values(
-    by="spectral_rolloff_mean",
-    ascending=False
-)
+---
 
+### Why this step is useful
 
-#Analyzed Parameters
+- detect outliers  
+- understand acoustic differences  
+- prepare machine learning analysis  
+- interpret PCA and clustering  
 
-F0 (Pitch)
-high → acute sounds
-low → deep sounds
+---
 
-Spectral Centroid
-high → noisy / spectrally rich sounds
-low → stable / pure sounds
+## Step 5 – Run the project
 
-Spectral Bandwidth
-high → wide frequency dispersion
-low → compact spectrum
+### 1. Feature extraction
 
-Spectral Rolloff
-high → strong high-frequency energy
-low → weaker energy
+```bash
+python src/crowd_analysis.py
 
+## Step 5 – Run the project
 
-A summary JSON file is automatically generated:
+### Visualization
 
-outputs/feature_inspection.json
+**File execution:**
 
-This file contains rankings of sounds according to each feature.
+```bash
+python src/visualization.py
 
+## Check outputs
+ls outputs/
+ls figures/
+Conclusion
 
+### This project allows:
 
-Why This Step Is Useful
-
-This step helps:
-
-interpret the data before classification
-detect outliers
-understand acoustic differences
-prepare machine learning analyses
-
-
-
-
-
-
-This project allows:
-
-extraction of audio features
+extraction of acoustic features
 statistical comparison between groups
-visualization of data structure
+visualization of dataset structure
 testing class separability
 exploration of acoustic variability
