@@ -78,7 +78,7 @@ This structure is designed to support reproducibility, organization, and open sc
 
 
 
-## Procedure
+#Procedure
 
 ---
 
@@ -86,10 +86,10 @@ This structure is designed to support reproducibility, organization, and open sc
 
 **File:** `src/crowd_analysis.py`
 
-# Objective
+### Objective
 Extract acoustic features from each `.wav` audio file using `librosa`.
 
-# Extracted Features
+### Extracted Features
 
 - duration  
 - global intensity (RMS)  
@@ -99,7 +99,7 @@ Extract acoustic features from each `.wav` audio file using `librosa`.
 - spectral rolloff  
 - MFCC (13 coefficients)  
 
-# Output
+### Output
 
 Each audio file generates a JSON file:
 
@@ -181,7 +181,7 @@ Check if the algorithm can recover groups without labels.
 ### Clustering
 - validates or questions dataset structure  
 
----
+
 
 ## Step 4 – Feature Inspection
 
