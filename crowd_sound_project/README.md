@@ -86,10 +86,10 @@ This structure is designed to support reproducibility, organization, and open sc
 
 **File:** `src/crowd_analysis.py`
 
-### Objective
+# Objective
 Extract acoustic features from each `.wav` audio file using `librosa`.
 
-### Extracted Features
+# Extracted Features
 
 - duration  
 - global intensity (RMS)  
@@ -99,14 +99,14 @@ Extract acoustic features from each `.wav` audio file using `librosa`.
 - spectral rolloff  
 - MFCC (13 coefficients)  
 
-### Output
+# Output
 
 Each audio file generates a JSON file:
 
 - outputs/J-03/results.json
 - outputs/A-01/results.json
 
-### Example JSON
+# Example JSON
 
 ```json
 {
@@ -125,10 +125,10 @@ Each audio file generates a JSON file:
 
 **File:** `src/visualization.py`
 
-### Objective
+# Objective
 Compare audio signals between groups (A vs J) and analyze their acoustic structure.
 
-### Packages used
+# Packages used
 
 - seaborn
 - pandas
@@ -136,116 +136,116 @@ Compare audio signals between groups (A vs J) and analyze their acoustic structu
 
 ---
 
-### 2.1 Boxplots (statistical comparison)
+# 2.1 Boxplots (statistical comparison)
 
-### Variables analyzed
+# Variables analyzed
 
 - F0 (pitch)
 - spectral centroid (brightness / noisiness)
 
-### Code used
+# Code used
 
 ```python
 sns.boxplot(data=df, x="group", y="f0_mean")
 sns.boxplot(data=df, x="group", y="spectral_centroid_mean")
 
-### Interpretation
+# Interpretation
 
 - pitch differences between groups  
 - spectral richness / noise differences  
 
 ---
 
-### 2.2 PCA (dimensionality reduction)
+# 2.2 PCA (dimensionality reduction)
 
-### Objective
+# Objective
 Reduce MFCC features from 13D → 2D
 
-### Method
+# Method
 
 ```python
 PCA(n_components=2)
 
-### Output
+# Output
 
 - pca_mfcc.png → global visualization  
 - pca_mfcc_individual.png → individual labeled points  
 
-### Interpretation
+# Interpretation
 
 - clustering of similar sounds  
 - separation or overlap between groups  
 - detection of outliers  
 
----
 
-### 2.3 K-means clustering
 
-### Objective
+# 2.3 K-means clustering
+
+# Objective
 Check if the algorithm can recover groups without labels.
 
-### Method
+# Method
 
 ```python
 KMeans(n_clusters=2)
 
-### Output
+# Output
 
 - kmeans_mfcc.png  
 
-### Interpretation
+# Interpretation
 
 - clusters ≈ A/J → good separability  
 - mixed clusters → strong variability  
 
----
+
 
 ## Step 3 – Feature Interpretation
 
-### F0 (Pitch)
+# F0 (Pitch)
 
 - high → high-pitched sounds  
 - low → low-pitched sounds  
 
----
 
-### spectral centroid
+
+# spectral centroid
 
 - high → noisy / crowd / mixed sounds  
 - low → stable / pure sounds  
 
----
 
-### PCA MFCC
+
+# PCA MFCC
 
 - clear separation → distinct classes  
 - overlap → acoustic similarity  
 
----
 
-### clustering
+
+# clustering
 
 - validates or questions dataset structure  
 
----
+
 
 ## Step 4 – Feature Inspection
 
 **File:** `src/visualization.py`
 
-### Objective
+# Objective
 Inspect each sound individually using acoustic features.
 
-### Features analyzed
+# Features analyzed
 
 - highest / lowest F0  
 - highest / lowest spectral centroid  
 - highest / lowest spectral bandwidth  
 - highest / lowest spectral rolloff  
 
----
 
-### Method
+
+# Method
 
 ```python id="m8k3qz"
 df_sorted_f0 = df.sort_values(by="f0_mean", ascending=False)
@@ -253,43 +253,43 @@ df_sorted_centroid = df.sort_values(by="spectral_centroid_mean", ascending=False
 df_sorted_bandwidth = df.sort_values(by="spectral_bandwidth_mean", ascending=False)
 df_sorted_rolloff = df.sort_values(by="spectral_rolloff_mean", ascending=False)
 
-### Output
+# Output
 
 - outputs/feature_inspection.json  
 
----
 
-### Why this step is useful
+
+# Why this step is useful
 
 - detect outliers  
 - understand acoustic differences  
 - prepare machine learning analysis  
 - interpret PCA and clustering  
 
----
+
 
 ## Step 5 – Run the project
 
-### 1. Feature extraction
+# 1. Feature extraction
 
 ```bash
 python src/crowd_analysis.py
 
-## Step 5 – Run the project
 
-### Visualization
+
+# Visualization
 
 **File execution:**
 
 ```bash
 python src/visualization.py
 
-## Check outputs
+# Check outputs
 ls outputs/
 ls figures/
 Conclusion
 
-### This project allows:
+##This project allows:
 
 extraction of acoustic features
 statistical comparison between groups
