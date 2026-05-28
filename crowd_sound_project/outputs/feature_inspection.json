@@ -1,0 +1,178 @@
+{
+    "highest_f0": [
+        {
+            "file": "J-03",
+            "f0_mean": 443.3296145490791
+        },
+        {
+            "file": "J-04",
+            "f0_mean": 419.0302826121733
+        },
+        {
+            "file": "J-05",
+            "f0_mean": 389.91318213299246
+        },
+        {
+            "file": "A-01",
+            "f0_mean": 297.99572727893036
+        },
+        {
+            "file": "J-02",
+            "f0_mean": 294.56105584616114
+        }
+    ],
+    "lowest_f0": [
+        {
+            "file": "A-05",
+            "f0_mean": 256.9234630852085
+        },
+        {
+            "file": "A-02",
+            "f0_mean": 247.81887079008683
+        },
+        {
+            "file": "A-04",
+            "f0_mean": 232.22567822623085
+        },
+        {
+            "file": "A-03",
+            "f0_mean": 188.01263350951726
+        },
+        {
+            "file": "A-06",
+            "f0_mean": 120.36575304591015
+        }
+    ],
+    "highest_spectral_centroid": [
+        {
+            "file": "J-05",
+            "spectral_centroid_mean": 3082.449785299583
+        },
+        {
+            "file": "J-04",
+            "spectral_centroid_mean": 3071.3249659461558
+        },
+        {
+            "file": "J-06",
+            "spectral_centroid_mean": 3059.0909604073977
+        },
+        {
+            "file": "A-04",
+            "spectral_centroid_mean": 2850.892644118451
+        },
+        {
+            "file": "J-03",
+            "spectral_centroid_mean": 2667.589143915553
+        }
+    ],
+    "lowest_spectral_centroid": [
+        {
+            "file": "J-01",
+            "spectral_centroid_mean": 2286.1614986723325
+        },
+        {
+            "file": "J-02",
+            "spectral_centroid_mean": 2124.5615626839244
+        },
+        {
+            "file": "A-02",
+            "spectral_centroid_mean": 1626.5822505713497
+        },
+        {
+            "file": "A-01",
+            "spectral_centroid_mean": 1621.094713007545
+        },
+        {
+            "file": "A-06",
+            "spectral_centroid_mean": 1305.4304430682055
+        }
+    ],
+    "highest_spectral_bandwidth": [
+        {
+            "file": "J-06",
+            "spectral_bandwidth_mean": 3380.133417416437
+        },
+        {
+            "file": "J-04",
+            "spectral_bandwidth_mean": 3212.0310216904154
+        },
+        {
+            "file": "J-05",
+            "spectral_bandwidth_mean": 3161.0738726902987
+        },
+        {
+            "file": "A-05",
+            "spectral_bandwidth_mean": 3065.355124429042
+        },
+        {
+            "file": "J-03",
+            "spectral_bandwidth_mean": 2954.872153495444
+        }
+    ],
+    "lowest_spectral_bandwidth": [
+        {
+            "file": "A-04",
+            "spectral_bandwidth_mean": 2381.379325108393
+        },
+        {
+            "file": "J-01",
+            "spectral_bandwidth_mean": 1753.44697923238
+        },
+        {
+            "file": "A-01",
+            "spectral_bandwidth_mean": 1520.5005847233685
+        },
+        {
+            "file": "A-02",
+            "spectral_bandwidth_mean": 1442.1257565240094
+        },
+        {
+            "file": "A-06",
+            "spectral_bandwidth_mean": 1423.3048736568853
+        }
+    ],
+    "highest_spectral_rolloff": [
+        {
+            "file": "J-06",
+            "spectral_rolloff_mean": 6130.999849759615
+        },
+        {
+            "file": "J-04",
+            "spectral_rolloff_mean": 5539.228723404255
+        },
+        {
+            "file": "J-05",
+            "spectral_rolloff_mean": 5506.482712765957
+        },
+        {
+            "file": "A-05",
+            "spectral_rolloff_mean": 5037.566489361702
+        },
+        {
+            "file": "A-03",
+            "spectral_rolloff_mean": 4984.770883413462
+        }
+    ],
+    "lowest_spectral_rolloff": [
+        {
+            "file": "J-01",
+            "spectral_rolloff_mean": 3562.751277043269
+        },
+        {
+            "file": "J-02",
+            "spectral_rolloff_mean": 3322.80585106383
+        },
+        {
+            "file": "A-01",
+            "spectral_rolloff_mean": 2453.625676081731
+        },
+        {
+            "file": "A-02",
+            "spectral_rolloff_mean": 2356.394981971154
+        },
+        {
+            "file": "A-06",
+            "spectral_rolloff_mean": 2176.5099158653848
+        }
+    ]
+}
