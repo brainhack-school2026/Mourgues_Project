@@ -106,21 +106,6 @@ Each audio file generates a JSON file:
 - outputs/J-03/results.json
 - outputs/A-01/results.json
 
-# Example JSON
-
-```json
-{
-  "file": "A-01.wav",
-  "duration": 1.5,
-  "global_intensity": 0.04,
-  "f0_mean": 300.2,
-  "f0_variability": 120.1,
-  "spectral_centroid_mean": 1600,
-  "spectral_bandwidth_mean": 1500,
-  "spectral_rolloff_mean": 2400,
-  "mfcc_mean": [...]
-}
-
 ## Step 2 – Visualization and Analysis
 
 **File:** `src/visualization.py`
@@ -133,25 +118,16 @@ Compare audio signals between groups (A vs J) and analyze their acoustic structu
 - pandas
 - scikit-learn
 
----
-
 ### 2.1 Boxplots (statistical comparison)
 
 #### Variables analyzed
 - F0 (pitch)
-- spectral centroid (brightness / noisiness)
-
-#### Code
-```python
-sns.boxplot(data=df, x="group", y="f0_mean")
-sns.boxplot(data=df, x="group", y="spectral_centroid_mean")
-```
+- spectral centroid (brightness / noise differences)
 
 #### Interpretation
 - pitch differences between groups  
 - spectral richness / noise differences  
 
----
 
 ### 2.2 PCA (dimensionality reduction)
 
@@ -172,17 +148,12 @@ PCA(n_components=2)
 - separation or overlap between groups  
 - detection of outliers  
 
----
 
 ### 2.3 K-means clustering
 
 #### Objective
 Check if the algorithm can recover groups without labels.
 
-#### Method
-```python
-KMeans(n_clusters=2)
-```
 
 #### Output
 - `kmeans_mfcc.png`
@@ -225,14 +196,6 @@ Inspect each sound individually using acoustic features.
 - highest / lowest spectral bandwidth  
 - highest / lowest spectral rolloff  
 
-### Method
-```python
-df_sorted_f0 = df.sort_values(by="f0_mean", ascending=False)
-df_sorted_centroid = df.sort_values(by="spectral_centroid_mean", ascending=False)
-df_sorted_bandwidth = df.sort_values(by="spectral_bandwidth_mean", ascending=False)
-df_sorted_rolloff = df.sort_values(by="spectral_rolloff_mean", ascending=False)
-```
-
 ### Output
 - `outputs/feature_inspection.json`
 
@@ -242,7 +205,6 @@ df_sorted_rolloff = df.sort_values(by="spectral_rolloff_mean", ascending=False)
 - prepare machine learning analysis  
 - interpret PCA and clustering  
 
----
 
 ## Step 5 – Run the project
 
@@ -262,7 +224,6 @@ ls outputs/
 ls figures/
 ```
 
----
 
 ## Conclusion
 
