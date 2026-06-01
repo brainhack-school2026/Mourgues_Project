@@ -19,55 +19,33 @@ The project also emphasizes reproducibility and open science practices through t
 crowd_sound_project/
 │
 ├── README.md
-├── data
-│   └── sounds
-│       ├── A-01.wav
-│       ├── A-02.wav
-│       ├── A-03.wav
-│       ├── A-04.wav
-│       ├── A-05.wav
-│       ├── A-06.wav
-│       ├── J-01.wav
-│       ├── J-02.wav
-│       ├── J-03.wav
-│       ├── J-04.wav
-│       ├── J-05.wav
-│       └── J-06.wav
-├── figures
-│   ├── f0_mean_boxplot.png
-│   ├── kmeans_mfcc.png
-│   ├── pca_mfcc.png
-│   ├── pca_mfcc_individual.png
-│   └── spectral_centroid_boxplot.png
-├── outputs
-│   ├── A-01
-│   │   └── results.json
-│   ├── A-02
-│   │   └── results.json
-│   ├── A-03
-│   │   └── results.json
-│   ├── A-04
-│   │   └── results.json
-│   ├── A-05
-│   │   └── results.json
-│   ├── A-06
-│   │   └── results.json
-│   ├── J-01
-│   │   └── results.json
-│   ├── J-02
-│   │   └── results.json
-│   ├── J-03
-│   │   └── results.json
-│   ├── J-04
-│   │   └── results.json
-│   ├── J-05
-│   │   └── results.json
-│   ├── J-06
-│   │   └── results.json
-│   └── feature_inspection.json
-└── src
-    ├── crowd_analysis.py
-    └── visualization.py
+├── myst.yml                        # Jupyter Book configuration
+├── methods.md                      # Methods page
+├── results.md                      # Results page
+├── environment.yml
+│
+├── data/
+│   └── sounds/
+│       ├── A1.wav ... A26.wav      # Group A (26 files)
+│       └── J1.wav ... J26.wav      # Group J (26 files)
+│
+├── notebooks/
+│   ├── 01_extraction.ipynb         # Feature extraction
+│   └── 02_visualization.ipynb      # Visualization and analysis
+│
+├── src/
+│   ├── crowd_analysis.py
+│   └── visualization.py
+│
+├── figures/
+│   ├── boxplots_by_group.png
+│   ├── pca_mfcc_individual.png
+│   └── kmeans_mfcc.png
+│
+└── outputs/
+    ├── A1/results.json ... 
+    └── feature_inspection.json
+
 ```
 
 This structure is designed to support reproducibility, organization, and open science practices throughout the project development process.
@@ -79,11 +57,12 @@ This structure is designed to support reproducibility, organization, and open sc
 
 
 
-
 # Procedure
 
 
 ## Step 1 – Audio Feature Extraction
+
+Notebook: \`notebooks/01_extraction.ipynb\`
 
 **File:** `src/crowd_analysis.py`
 
@@ -102,12 +81,15 @@ Extract acoustic features from each `.wav` audio file using `librosa`.
 
 ### Output
 
+
 Each audio file generates a JSON file:
 
-- outputs/J-03/results.json
-- outputs/A-01/results.json
+- outputs/J3/results.json
+- outputs/A1/results.json
 
 ## Step 2 – Visualization and Analysis
+
+Notebook: \`notebooks/02_visualization.ipynb\`
 
 **File:** `src/visualization.py`
 
@@ -209,20 +191,9 @@ Inspect each sound individually using acoustic features.
 
 ## Step 5 – Run the project
 
-### Feature extraction
 ```bash
-python src/crowd_analysis.py
-```
-
-### Visualization
-```bash
-python src/visualization.py
-```
-
-### Check outputs
-```bash
-ls outputs/
-ls figures/
+jupyter nbconvert --to notebook --execute notebooks/01_extraction.ipynb --inplace
+jupyter nbconvert --to notebook --execute notebooks/02_visualization.ipynb --inplace
 ```
 
 
