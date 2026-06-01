@@ -1,0 +1,17 @@
+version: 1
+project:
+  id: 184ae1d8-b522-47e3-89ca-23d307627f5c
+  title: Crowd Sound Project
+  description: Acoustic analysis and interactive visualization of crowd vocalizations
+  keywords: [crowd sounds, acoustics, MFCC, PCA, UMAP, librosa]
+  authors:
+    - name: Oceane Mourgues
+  github: https://github.com/brainhack-school2026/Mourgues_Project
+  toc:
+    - file: README.md
+    - file: methods.md
+    - file: notebooks/01_extraction.ipynb
+    - file: notebooks/02_visualization.ipynb
+    - file: results.md
+site:
+  template: book-theme
