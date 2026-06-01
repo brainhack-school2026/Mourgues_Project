@@ -15,3 +15,5 @@ project:
     - file: results.md
 site:
   template: book-theme
+  options:
+    base_url: /Mourgues_Project/
