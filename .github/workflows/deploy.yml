@@ -23,7 +23,8 @@ jobs:
 
       - name: Install dependencies
         run: |
-          pip install mystmd librosa numpy pandas seaborn scikit-learn matplotlib nbconvert
+          pip install mystmd librosa numpy pandas seaborn scikit-learn matplotlib nbconvert ipykernel
+          python -m ipykernel install --user --name python3
 
       - name: Execute notebooks
         run: |
