@@ -35,6 +35,7 @@ jobs:
       - name: Build MyST site
         run: |
           cd crowd_sound_project
+          export BASE_URL="/Mourgues_Project"
           myst build --html
 
       - name: Upload Pages artifact
