@@ -34,7 +34,8 @@ crowd_sound_project/
 │
 ├── notebooks/
 │   ├── 01_extraction.ipynb         # Feature extraction
-│   └── 02_visualization.ipynb      # Visualization and analysis
+│   ├── 02_visualization.ipynb      # Visualization and analysis
+│   └── 03_interactive.ipynb        # Interactive visualizations, UMAP, │
 │
 ├── src/
 │   ├── crowd_analysis.py
@@ -151,6 +152,21 @@ Check if the algorithm can recover groups without labels.
 - mixed clusters → strong variability  
 
 ---
+**Features**
+- PCA and UMAP projections with toggle selector (group filter)
+- Click any point → play the corresponding audio
+- Waveform + spectrogram display per sound (Plotly)
+- Acoustic parameters table per sound
+- Free feature scatter plot (X/Y dropdowns) with audio playback on click
+
+**Statistical comparison (Group A vs J)**
+- Boxplots for all features (F0, RMS, centroid, bandwidth, rolloff, duration)
+- Mann-Whitney U tests with p-values
+
+**Key results**
+- F0 mean: p=0.0001 *** — Group J significantly higher pitch (300 Hz vs 204 Hz)
+- Spectral centroid: p=0.047 * — Group J slightly brighter
+- Other features: no significant differenc
 
 ## Step 3 – Feature Interpretation
 
@@ -205,12 +221,12 @@ jupyter nbconvert --to notebook --execute notebooks/02_visualization.ipynb --inp
 ## Conclusion
 
 This project allows:
-- extraction of acoustic features  
-- statistical comparison between groups  
-- visualization of dataset structure  
-- testing class separability  
-- exploration of acoustic variability  
-
+- extraction of acoustic features from 52 crowd sound stimuli
+- statistical comparison between groups A and J (Mann-Whitney U tests)
+- visualization of dataset structure via PCA, UMAP, and K-Means
+- interactive exploration with audio playback, waveform, and spectrogram
+- testing class separability
+- exploration of acoustic variability
 
 
 
