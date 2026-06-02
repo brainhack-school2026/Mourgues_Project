@@ -1,0 +1,17 @@
+name: crowd_sound_project
+channels:
+  - conda-forge
+  - defaults
+dependencies:
+  - python=3.11
+  - pip
+  - pip:
+      - librosa
+      - numpy
+      - pandas
+      - scikit-learn
+      - plotly
+      - ipywidgets
+      - umap-learn
+      - jupyter
+      - matplotlib
