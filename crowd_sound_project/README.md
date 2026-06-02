@@ -1,5 +1,8 @@
 # My presentation
 
+[![Binder](https://mybinder.org/badge_logo.svg)](https://mybinder.org/v2/gh/brainhack-school2026/Mourgues_Project/main?urlpath=%2Fdoc%2Ftree%2Fcrowd_sound_project%2Fnotebooks%2F03_interactive.ipynb)
+
+
 ## Resume 
 
 Here is the resume of the project:
@@ -54,6 +57,9 @@ This structure is designed to support reproducibility, organization, and open sc
 
  Click here to view the slides: https://docs.google.com/presentation/d/1v9t9jJARwTjZ2fG6t1Csj8lXJtg4WSRqbLEC1cxJR6A/edit?usp=sharing 
 
+## Site link 
+
+Site : https://brainhack-school2026.github.io/Mourgues_Project/
 
 
 
@@ -80,10 +86,9 @@ Extract acoustic features from each `.wav` audio file using `librosa`.
 - MFCC (13 coefficients)  
 
 ### Output
-
+ 
 
 Each audio file generates a JSON file:
-
 - outputs/J3/results.json
 - outputs/A1/results.json
 
