@@ -23,8 +23,7 @@ jobs:
 
       - name: Install dependencies
         run: |
-          pip install mystmd librosa numpy pandas seaborn scikit-learn matplotlib nbconvert ipykernel umap-learn plotly scipy
-          python -m ipykernel install --user --name python3
+          pip install mystmd librosa numpy pandas seaborn scikit-learn matplotlib nbconvert ipykernel umap-learn plotly scipy ipywidgets
       - name: Execute notebooks
         run: |
           cd crowd_sound_project
