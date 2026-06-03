@@ -9,11 +9,9 @@ project:
   github: https://github.com/brainhack-school2026/Mourgues_Project
   toc:
     - file: README.md
-    - file: methods.md
     - file: notebooks/01_extraction.ipynb
     - file: notebooks/02_visualization.ipynb
     - file: notebooks/03_interactive.ipynb
-    - file: results.md
 site:
   template: book-theme
   options:
