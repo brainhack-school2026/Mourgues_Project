@@ -1,6 +1,14 @@
-# My presentation
+# Crowd Sound Project
 
-[![Binder](https://mybinder.org/badge_logo.svg)](https://mybinder.org/v2/gh/brainhack-school2026/Mourgues_Project/main?urlpath=%2Fdoc%2Ftree%2Fcrowd_sound_project%2Fnotebooks%2F03_interactive.ipynb)
+[![Binder](https://mybinder.org/badge_logo.svg)](https://mybinder.org/v2/gh/brainhack-school2026/Mourgues_Project/main?urlpath=%2Fdoc%2Ftree%2Fcrow>
+
+## Dataset Description
+
+- **Name:** Crowd Sound Project
+- **Version:** 1.0.0
+- **Authors:** Oceane Mourgues
+- **License:** MIT
+- **DOI:** N/A
 
 
 ## Resume 
@@ -23,8 +31,6 @@ crowd_sound_project/
 │
 ├── README.md
 ├── myst.yml                        # Jupyter Book configuration
-├── methods.md                      # Methods page
-├── results.md                      # Results page
 ├── environment.yml
 │
 ├── data/
@@ -86,72 +92,40 @@ Extract acoustic features from each `.wav` audio file using `librosa`.
 - spectral rolloff  
 - MFCC (13 coefficients)  
 
-### Output
- 
+**Output**
+Each audio file generates a JSON file in `outputs/<sound_name>/results.json`.
 
-Each audio file generates a JSON file:
-- outputs/J3/results.json
-- outputs/A1/results.json
+### Step 2 – Visualization and Analysis
 
-## Step 2 – Visualization and Analysis
+Notebook: `notebooks/02_visualization.ipynb`
+File: `src/visualization.py`
 
-Notebook: \`notebooks/02_visualization.ipynb\`
-
-**File:** `src/visualization.py`
-
-### Objective
+**Objective**
 Compare audio signals between groups (A vs J) and analyze their acoustic structure.
 
-### Packages used
-- seaborn
-- pandas
-- scikit-learn
+**2.1 Feature Inspection**
+Ranks sounds by each feature (highest/lowest F0, centroid, bandwidth, rolloff).
+Output saved to `outputs/feature_inspection.json`.
 
-### 2.1 Boxplots (statistical comparison)
-
-#### Variables analyzed
+**2.2 Boxplots**
 - F0 (pitch)
-- spectral centroid (brightness / noise differences)
+- Spectral centroid (brightness / noise differences)
 
-#### Interpretation
-- pitch differences between groups  
-- spectral richness / noise differences  
+**2.3 PCA (dimensionality reduction)**
+Reduces MFCC features from 13D → 2D using `PCA(n_components=2)`.
+- `pca_mfcc_individual.png` → individual labeled points
 
-
-### 2.2 PCA (dimensionality reduction)
-
-#### Objective
-Reduce MFCC features from 13D → 2D
-
-#### Method
-```python
-PCA(n_components=2)
-```
-
-#### Output
-- `pca_mfcc.png` → global visualization  
-- `pca_mfcc_individual.png` → individual labeled points  
-
-#### Interpretation
-- clustering of similar sounds  
-- separation or overlap between groups  
-- detection of outliers  
-
-
-### 2.3 K-means clustering
-
-#### Objective
-Check if the algorithm can recover groups without labels.
-
-
-#### Output
+**2.4 K-Means clustering**
+Checks if the algorithm can recover groups without labels (k=2).
 - `kmeans_mfcc.png`
 
-#### Interpretation
-- clusters ≈ A/J → good separability  
-- mixed clusters → strong variability  
+### Step 3 – Interactive Exploration
 
----
+Notebook: `notebooks/03_interactive.ipynb`
+
+**Objective**
+Explore sounds interactively with Plotly and ipywidgets.
+
 **Features**
 - PCA and UMAP projections with toggle selector (group filter)
 - Click any point → play the corresponding audio
@@ -166,48 +140,16 @@ Check if the algorithm can recover groups without labels.
 **Key results**
 - F0 mean: p=0.0001 *** — Group J significantly higher pitch (300 Hz vs 204 Hz)
 - Spectral centroid: p=0.047 * — Group J slightly brighter
-- Other features: no significant differenc
+- Other features: no significant difference
 
-## Step 3 – Feature Interpretation
+### Step 4 – Feature Interpretation
 
-### F0 (Pitch)
-- high → high-pitched sounds  
-- low → low-pitched sounds  
-
-### Spectral centroid
-- high → noisy / crowd / mixed sounds  
-- low → stable / pure sounds  
-
-### PCA (MFCC)
-- clear separation → distinct classes  
-- overlap → acoustic similarity  
-
-### Clustering
-- validates or questions dataset structure  
-
-
-
-## Step 4 – Feature Inspection
-
-**File:** `src/visualization.py`
-
-### Objective
-Inspect each sound individually using acoustic features.
-
-### Features analyzed
-- highest / lowest F0  
-- highest / lowest spectral centroid  
-- highest / lowest spectral bandwidth  
-- highest / lowest spectral rolloff  
-
-### Output
-- `outputs/feature_inspection.json`
-
-### Why this step is useful
-- detect outliers  
-- understand acoustic differences  
-- prepare machine learning analysis  
-- interpret PCA and clustering  
+| Feature | High value | Low value |
+|---|---|---|
+| F0 | High-pitched sounds | Low-pitched sounds |
+| Spectral centroid | Noisy / mixed sounds | Stable / pure sounds |
+| PCA separation | Distinct classes | Acoustic similarity |
+| K-Means clusters | Good separability | High variability |
 
 
 ## Step 5 – Run the project
@@ -215,9 +157,15 @@ Inspect each sound individually using acoustic features.
 ```bash
 jupyter nbconvert --to notebook --execute notebooks/01_extraction.ipynb --inplace
 jupyter nbconvert --to notebook --execute notebooks/02_visualization.ipynb --inplace
+jupyter nbconvert --to notebook --execute notebooks/03_interactive.ipynb --inplace
 ```
 
+Or run the original scripts directly:
 
+```bash
+python src/crowd_analysis.py
+python src/visualization.py
+```
 ## Conclusion
 
 This project allows:
