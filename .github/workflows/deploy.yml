@@ -28,9 +28,7 @@ jobs:
         run: |
           cd crowd_sound_project
           jupyter nbconvert --to notebook --execute notebooks/01_extraction.ipynb --inplace
-          jupyter nbconvert --to notebook --execute notebooks/02_visualization.ipynb --inplace
-          jupyter nbconvert --to notebook --execute notebooks/03_interactive.ipynb --inplace
-      - name: Build MyST site
+          jupyter nbconvert --to notebook --execute notebooks/02_visualization.ipynb --inplace      - name: Build MyST site
         run: |
           cd crowd_sound_project
           export BASE_URL="/Mourgues_Project"
