@@ -1,0 +1,9 @@
+numpy
+pandas
+plotly
+scikit-learn
+scipy
+librosa
+umap-learn
+ipywidgets
+jupyterlab
