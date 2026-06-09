@@ -1,6 +1,6 @@
 # Crowd Sound Project
 
-[![Binder](https://mybinder.org/badge_logo.svg)](https://mybinder.org/v2/gh/brainhack-school2026/Mourgues_Project/main?urlpath=%2Fdoc%2Ftree%2Fcrowd_sound_project%2Fnotebooks%2F03_interactive.ipynb)
+[![Binder](https://mybinder.org/badge_logo.svg)](https://mybinder.org/v2/gh/brainhack-school2026/Mourgues_Project/main?urlpath=%2Fdoc%2Ftree%2Fcrowd_sound_project%2Fnotebooks%2F01_extraction.ipynb)
 
 ## Dataset Description
 
