@@ -11,7 +11,10 @@ project:
     - file: README.md
     - file: notebooks/01_extraction.ipynb
     - file: notebooks/02_visualization.ipynb
-    - file: notebooks/03_interactive.ipynb
+    - file: notebooks/03a_dimensionality_reduction.ipynb
+    - file: notebooks/03b_individual_sound.ipynb
+    - file: notebooks/03c_feature_comparison.ipynb
+    - file: notebooks/03d_statistical_comparaison.ipynb
 site:
   template: book-theme
   options:
